@@ -24,7 +24,7 @@ int[,] CreateMatrixArray (int row, int column, int min, int max)
 }
 int[,] SortMatrixArray (int[,] array, int row = 0)
 {
-    int[,] SortedArray = new int[array.GetLength(0), array.GetLength(1)];
+    int[,] SortedArray = array;
     int[] arrayForSort = new int[array.GetLength(1)];
     if (row > array.GetLength(0)-1) return SortedArray;
     for (int i = 0; i < array.GetLength(1); i++)
@@ -33,14 +33,13 @@ int[,] SortMatrixArray (int[,] array, int row = 0)
     }
     Array.Sort(arrayForSort);
     Array.Reverse(arrayForSort);
-    for (int i = 0; i < array.GetLength(1); i++)
+    for (int j = 0; j < array.GetLength(1); j++)
     {
-        SortedArray[row, i] = arrayForSort[i];
+        SortedArray[row, j] = arrayForSort[j];
     }
-    SortMatrixArray(array, row+1);
-    return SortedArray;
+    return SortMatrixArray(SortedArray,row+1);
 }
-int[,] myArray = CreateMatrixArray(3, 4, 1, 8);
+int[,] myArray = CreateMatrixArray(4, 4, 1, 8);
 PrintArray(myArray);
 Console.WriteLine();
 int[,] newArray = SortMatrixArray(myArray);
